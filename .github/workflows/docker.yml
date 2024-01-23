@@ -79,5 +79,11 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Push Image to container registry 📤
+        uses: docker/build-push-action@v5
         if: github.ref == 'refs/heads/main' || github.event_name == 'schedule'
-        run: docker push --all-tags ${{ env.OWNER }}/${{ env.IMAGE_NAME }}
+        with:
+          context: image/
+          push: true
+          tags: |
+            ${{ env.OWNER }}/${{ env.IMAGE_NAME }}:latest
+            ${{ env.OWNER }}/${{ env.IMAGE_NAME }}:${{steps.get_sha.outputs.sha12}}
