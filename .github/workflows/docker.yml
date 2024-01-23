@@ -1,7 +1,7 @@
 name: Build, test, and publish Docker Images
 
 env:
-  OWNER: ${{ github.actor }}
+  OWNER: ${{ github.repository_owner }}
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.event.repository.name }}
 
@@ -74,7 +74,7 @@ jobs:
         uses: docker/login-action@v3
         with:
           registry: ${{ env.REGISTRY }}
-          username: ${{ env.OWNER }}
+          username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Push Image to container registry 📤
