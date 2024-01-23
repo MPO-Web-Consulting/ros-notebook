@@ -1,7 +1,8 @@
 name: Build, test, and publish Docker Images
 
 env:
-  OWNER: ${{ toLower(github.repository_owner) }}
+  # OWNER: ${{ github.repository_owner }}
+  OWNER: ${{ mpo-web-consulting }}
   REGISTRY: ghcr.io
   IMAGE_NAME: ${{ github.event.repository.name }}
 
