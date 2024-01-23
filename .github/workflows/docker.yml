@@ -61,7 +61,7 @@ jobs:
         id: get_sha
 
       - name: Build image 🛠
-        run: docker build --rm --force-rm --tag ${{ env.OWNER }}/${{ env.IMAGE_NAME }}:latest --tag ${{ env.OWNER }}/${{ env.IMAGE_NAME }}:${{steps.get_sha.outputs.sha12}} image/
+        run: docker build --rm --force-rm --tag ${{ env.REGISTRY }}/${{ env.OWNER }}/${{ env.IMAGE_NAME }}:latest --tag ${{ env.REGISTRY }}/${{ env.OWNER }}/${{ env.IMAGE_NAME }}:${{steps.get_sha.outputs.sha12}} image/
         env:
           DOCKER_BUILDKIT: 1
           # Full logs for CI build
@@ -85,5 +85,5 @@ jobs:
           context: image/
           push: true
           tags: |
-            ${{ env.OWNER }}/${{ env.IMAGE_NAME }}:latest
-            ${{ env.OWNER }}/${{ env.IMAGE_NAME }}:${{steps.get_sha.outputs.sha12}}
+            ${{ env.REGISTRY }}/${{ env.OWNER }}/${{ env.IMAGE_NAME }}:latest
+            ${{ env.REGISTRY }}/${{ env.OWNER }}/${{ env.IMAGE_NAME }}:${{steps.get_sha.outputs.sha12}}
