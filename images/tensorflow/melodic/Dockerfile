@@ -1,3 +1,7 @@
+# this dockerfile is generated from a template
+# do not modify it directly, modify the template instead
+# template: templates/ros.Dockerfile.j2
+
 # base image
 FROM jupyter/tensorflow-notebook:ubuntu-18.04
 
@@ -35,9 +39,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     python3-rosdep \
     python3-vcstools \
-    
     python3-rosinstall \
-    
     && rm -rf /var/lib/apt/lists/*
 
 # bootstrap rosdep
@@ -45,7 +47,6 @@ RUN rosdep init
 # update rosdep
 USER ${NB_UID}
 RUN rosdep update --rosdistro $ROS_DISTRO
-
 
 
 # Source the ROS setup file

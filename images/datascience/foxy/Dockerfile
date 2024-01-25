@@ -1,3 +1,7 @@
+# this dockerfile is generated from a template
+# do not modify it directly, modify the template instead
+# template: templates/ros.Dockerfile.j2
+
 # base image
 FROM jupyter/datascience-notebook:ubuntu-20.04
 
@@ -35,10 +39,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     build-essential \
     python3-rosdep \
     python3-vcstools \
-    
     python3-colcon-common-extensions \
     python3-colcon-mixin \
-    
     && rm -rf /var/lib/apt/lists/*
 
 # bootstrap rosdep
@@ -47,7 +49,6 @@ RUN rosdep init
 USER ${NB_UID}
 RUN rosdep update --rosdistro $ROS_DISTRO
 
-
 # setup colcon mixin and metadata
 RUN colcon mixin add default \
       https://raw.githubusercontent.com/colcon/colcon-mixin-repository/master/index.yaml && \
@@ -55,7 +56,6 @@ RUN colcon mixin add default \
     colcon metadata add default \
       https://raw.githubusercontent.com/colcon/colcon-metadata-repository/master/index.yaml && \
     colcon metadata update
-
 
 # Source the ROS setup file
 RUN echo "source /opt/ros/${ROS_DISTRO}/setup.bash" >> ~/.bashrc
