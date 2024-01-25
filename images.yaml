@@ -1,0 +1,27 @@
+# list of images to generate using scripts/generate_images.py
+base_notebook_images:
+  - jupyter/minimal-notebook
+  - jupyter/scipy-notebook
+  - jupyter/datascience-notebook
+  - jupyter/tensorflow-notebook
+
+ros_flavours:
+  - ros_distro: melodic
+    ros_version: 1
+    notebook_tag: ubuntu-18.04
+    ubuntu_codename: "focal"
+
+  - ros_distro: noetic
+    ros_version: 1
+    notebook_tag: ubuntu-20.04
+    ubuntu_codename: "focal"
+
+  - ros_distro: foxy
+    ros_version: 2
+    notebook_tag: ubuntu-20.04
+    ubuntu_codename: "focal"
+
+  - ros_distro: humble
+    ros_version: 2
+    notebook_tag: ubuntu-22.04
+    ubuntu_codename: "jammy"

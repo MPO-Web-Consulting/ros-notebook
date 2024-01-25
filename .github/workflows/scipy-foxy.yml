@@ -1,4 +1,5 @@
-name: Build, test, and publish Docker Images
+# github action for building and pushing docker images
+name: Build, test, and publish Docker Image tagged scipy-foxy
 
 env:
   # OWNER: ${{ github.repository_owner }}
@@ -14,16 +15,16 @@ on:
     - cron: "0 7 * * 1"
   pull_request:
     paths:
-      - ".github/workflows/docker.yml"
-      - "image/**"
+      - ".github/workflows/**"
+      - "images/**"
       - "tests/**"
       - "requirements-dev.txt"
   push:
     branches:
       - main
     paths:
-      - ".github/workflows/docker.yml"
-      - "image/**"
+      - ".github/workflows/**"
+      - "images/**"
       - "tests/**"
       - "requirements-dev.txt"
   workflow_dispatch:
@@ -62,7 +63,8 @@ jobs:
         id: get_sha
 
       - name: Build image 🛠
-        run: docker build --rm --force-rm --tag ${{ env.REGISTRY }}/${{ env.OWNER }}/${{ env.IMAGE_NAME }}:latest --tag ${{ env.REGISTRY }}/${{ env.OWNER }}/${{ env.IMAGE_NAME }}:${{steps.get_sha.outputs.sha12}} image/
+        run: |
+          docker build --rm --force-rm --tag ${{ env.REGISTRY }}/${{ env.OWNER }}/${{ env.IMAGE_NAME }}:latest images/scipy/foxy
         env:
           DOCKER_BUILDKIT: 1
           # Full logs for CI build
@@ -83,8 +85,8 @@ jobs:
         uses: docker/build-push-action@v5
         if: github.ref == 'refs/heads/main' || github.event_name == 'schedule'
         with:
-          context: image/
+          context: images/scipy/foxy/
           push: true
           tags: |
-            ${{ env.REGISTRY }}/${{ env.OWNER }}/${{ env.IMAGE_NAME }}:latest
-            ${{ env.REGISTRY }}/${{ env.OWNER }}/${{ env.IMAGE_NAME }}:${{steps.get_sha.outputs.sha12}}
+            ${{ env.REGISTRY }}/${{ env.OWNER }}/${{ env.IMAGE_NAME }}:scipy-foxy
+            ${{ env.REGISTRY }}/${{ env.OWNER }}/${{ env.IMAGE_NAME }}:scipy-foxy-${{steps.get_sha.outputs.sha12}}

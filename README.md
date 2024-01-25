@@ -25,3 +25,13 @@ RUN mamba install -y tensorflow && \
 # switch back to jovyan to avoid accidental container runs as root
 USER ${NB_UID}
 ```
+
+## Generate the Images and actions
+
+```bash
+# generate Dockerfiles for all images
+python3 scripts/generate_images.py templates/Dockerfile.j2 images images.yaml
+
+# generate actions for all images
+python3 scripts/generate_workflows.py templates/action.yml.j2 images .github/workflows
+```
