@@ -6,10 +6,10 @@ base_notebook_images:
   - jupyter/tensorflow-notebook
 
 ros_flavours:
-  - ros_distro: melodic
-    ros_version: 1
-    notebook_tag: ubuntu-18.04
-    ubuntu_codename: "focal"
+  # - ros_distro: melodic
+  #   ros_version: 1
+  #   notebook_tag: ubuntu-18.04
+  #   ubuntu_codename: "focal"
 
   - ros_distro: noetic
     ros_version: 1
