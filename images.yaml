@@ -25,3 +25,8 @@ ros_flavours:
     ros_version: 2
     notebook_tag: ubuntu-22.04
     ubuntu_codename: "jammy"
+
+  - ros_distro: rolling
+    ros_version: 2
+    notebook_tag: ubuntu-22.04
+    ubuntu_codename: "jammy"

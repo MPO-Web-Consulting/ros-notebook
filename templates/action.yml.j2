@@ -88,5 +88,23 @@ jobs:
           context: {{ TEMPLATE_DOCKER_CONTEXT }}/
           push: true
           tags: |
+            {% if TEMPLATE_TAG == 'datascience-humble' -%}
+            ${{'{{'}} env.REGISTRY {{'}}'}}/${{'{{'}} env.OWNER {{'}}'}}/${{'{{'}} env.IMAGE_NAME {{'}}'}}:latest
+            ${{'{{'}} env.REGISTRY {{'}}'}}/${{'{{'}} env.OWNER {{'}}'}}/${{'{{'}} env.IMAGE_NAME {{'}}'}}:${{'{{'}}steps.get_sha.outputs.sha12{{'}}'}}
+            ${{'{{'}} env.REGISTRY {{'}}'}}/${{'{{'}} env.OWNER {{'}}'}}/${{'{{'}} env.IMAGE_NAME {{'}}'}}:humble
+            ${{'{{'}} env.REGISTRY {{'}}'}}/${{'{{'}} env.OWNER {{'}}'}}/${{'{{'}} env.IMAGE_NAME {{'}}'}}:humble-${{'{{'}}steps.get_sha.outputs.sha12{{'}}'}}
+            {% elif TEMPLATE_TAG == 'datascience-foxy' -%}
+            ${{'{{'}} env.REGISTRY {{'}}'}}/${{'{{'}} env.OWNER {{'}}'}}/${{'{{'}} env.IMAGE_NAME {{'}}'}}:foxy
+            ${{'{{'}} env.REGISTRY {{'}}'}}/${{'{{'}} env.OWNER {{'}}'}}/${{'{{'}} env.IMAGE_NAME {{'}}'}}:foxy-${{'{{'}}steps.get_sha.outputs.sha12{{'}}'}}
+            {% elif TEMPLATE_TAG == 'datascience-noetic' -%}
+            ${{'{{'}} env.REGISTRY {{'}}'}}/${{'{{'}} env.OWNER {{'}}'}}/${{'{{'}} env.IMAGE_NAME {{'}}'}}:noetic
+            ${{'{{'}} env.REGISTRY {{'}}'}}/${{'{{'}} env.OWNER {{'}}'}}/${{'{{'}} env.IMAGE_NAME {{'}}'}}:noetic-${{'{{'}}steps.get_sha.outputs.sha12{{'}}'}}
+            {% elif TEMPLATE_TAG == 'datascience-melodic' -%}
+            ${{'{{'}} env.REGISTRY {{'}}'}}/${{'{{'}} env.OWNER {{'}}'}}/${{'{{'}} env.IMAGE_NAME {{'}}'}}:melodic
+            ${{'{{'}} env.REGISTRY {{'}}'}}/${{'{{'}} env.OWNER {{'}}'}}/${{'{{'}} env.IMAGE_NAME {{'}}'}}:melodic-${{'{{'}}steps.get_sha.outputs.sha12{{'}}'}}
+            {% elif TEMPLATE_TAG == 'datascience-rolling' -%}
+            ${{'{{'}} env.REGISTRY {{'}}'}}/${{'{{'}} env.OWNER {{'}}'}}/${{'{{'}} env.IMAGE_NAME {{'}}'}}:rolling
+            ${{'{{'}} env.REGISTRY {{'}}'}}/${{'{{'}} env.OWNER {{'}}'}}/${{'{{'}} env.IMAGE_NAME {{'}}'}}:rolling-${{'{{'}}steps.get_sha.outputs.sha12{{'}}'}}
+            {% endif -%}
             ${{'{{'}} env.REGISTRY {{'}}'}}/${{'{{'}} env.OWNER {{'}}'}}/${{'{{'}} env.IMAGE_NAME {{'}}'}}:{{ TEMPLATE_TAG }}
             ${{'{{'}} env.REGISTRY {{'}}'}}/${{'{{'}} env.OWNER {{'}}'}}/${{'{{'}} env.IMAGE_NAME {{'}}'}}:{{ TEMPLATE_TAG }}-${{'{{'}}steps.get_sha.outputs.sha12{{'}}'}}

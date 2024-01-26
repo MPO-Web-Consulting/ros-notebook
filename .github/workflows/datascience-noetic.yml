@@ -88,5 +88,7 @@ jobs:
           context: images/datascience/noetic/
           push: true
           tags: |
+            ${{ env.REGISTRY }}/${{ env.OWNER }}/${{ env.IMAGE_NAME }}:noetic
+            ${{ env.REGISTRY }}/${{ env.OWNER }}/${{ env.IMAGE_NAME }}:noetic-${{steps.get_sha.outputs.sha12}}
             ${{ env.REGISTRY }}/${{ env.OWNER }}/${{ env.IMAGE_NAME }}:datascience-noetic
             ${{ env.REGISTRY }}/${{ env.OWNER }}/${{ env.IMAGE_NAME }}:datascience-noetic-${{steps.get_sha.outputs.sha12}}

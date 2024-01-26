@@ -8,25 +8,37 @@ ros-notebook is a community maintained [Jupyter Docker Stack](https://jupyter-do
 
 ## Tags
 
+### Short Tags
+
+![Latest](https://img.shields.io/badge/Latest-datascience--humble-teal.svg)
+![Noetic](https://img.shields.io/badge/Noetic-datascience--noetic-teal.svg)
+![Foxy](https://img.shields.io/badge/Foxy-datascience--foxy-teal.svg)
+![Humble](https://img.shields.io/badge/Humble-datascience--humble-teal.svg)
+![Rolling](https://img.shields.io/badge/Rolling-datascience--rolling-teal.svg)
+
+Short tags are all based on the `datascience-notebook` where `<ros-version>` is the ROS version. For example, `noetic` is a ROS Noetic image based on the `datascience-notebook`.
+
+### All Tags
+
 | ROS | Jupyter |
 | --- | ------- |
-[![ros](https://img.shields.io/badge/ROS-Noetic-blue.svg)](http://wiki.ros.org/noetic) | ![minimal-notebook](https://img.shields.io/badge/Minimal-grey.svg) ![scipy-notebook](https://img.shields.io/badge/Scipy-grey.svg) ![datascience-notebook](https://img.shields.io/badge/Data--Science-grey.svg) ![tensorflow-notebook](https://img.shields.io/badge/Tensorflow-grey.svg)
-[![ros](https://img.shields.io/badge/ROS-Foxy-blue.svg)](http://wiki.ros.org/foxy) | ![minimal-notebook](https://img.shields.io/badge/Minimal-grey.svg) ![scipy-notebook](https://img.shields.io/badge/Scipy-grey.svg) ![datascience-notebook](https://img.shields.io/badge/Data--Science-grey.svg) ![tensorflow-notebook](https://img.shields.io/badge/Tensorflow-grey.svg)
-[![ros](https://img.shields.io/badge/ROS-Humble-blue.svg)](http://wiki.ros.org/humble) | ![minimal-notebook](https://img.shields.io/badge/Minimal-grey.svg) ![scipy-notebook](https://img.shields.io/badge/Scipy-grey.svg) ![datascience-notebook](https://img.shields.io/badge/Data--Science-grey.svg) ![tensorflow-notebook](https://img.shields.io/badge/Tensorflow-grey.svg)
-[![ros](https://img.shields.io/badge/ROS-Rolling-blue.svg)](http://wiki.ros.org/rolling) | ![minimal-notebook](https://img.shields.io/badge/Minimal-grey.svg) ![scipy-notebook](https://img.shields.io/badge/Scipy-grey.svg) ![datascience-notebook](https://img.shields.io/badge/Data--Science-grey.svg) ![tensorflow-notebook](https://img.shields.io/badge/Tensorflow-grey.svg)
+[![ros](https://img.shields.io/badge/ROS-Noetic-white.svg)](http://wiki.ros.org/noetic) | ![minimal-notebook](https://img.shields.io/badge/Jupyter-Minimal-orange.svg)
+[![ros](https://img.shields.io/badge/ROS-Foxy-white.svg)](http://wiki.ros.org/foxy) | ![scipy-notebook](https://img.shields.io/badge/Jupyter-Scipy-orange.svg)
+[![ros](https://img.shields.io/badge/ROS-Humble-white.svg)](http://wiki.ros.org/humble) | ![datascience-notebook](https://img.shields.io/badge/Jupyter-Data--Science-orange.svg)
+[![ros](https://img.shields.io/badge/ROS-Rolling-white.svg)](http://wiki.ros.org/rolling) | ![tensorflow-notebook](https://img.shields.io/badge/Jupyter-Tensorflow-orange.svg)
 
-tags are formed as follows:
+All other tags are formed as follows:
 
-`<ros-version>-<notebook-type>`
+`<notebook-type>-<ros-version>`
 
-where `<ros-version>` is the ROS version and `<notebook-type>` is the type of notebook. For example, `noetic-minimal` is a ROS Noetic image based on the `minimal-notebook`.
+where `<ros-version>` is the ROS version and `<notebook-type>` is the type of notebook. For example, `minimal-noetic` is a ROS Noetic image based on the `minimal-notebook`.
 
 ## Usage
 
 An example `Dockerfile` for a custom notebook image:
 
 ```dockerfile
-FROM ghcr.io/mpo-web-consulting/ros-notebook:noetic-minimal
+FROM ghcr.io/mpo-web-consulting/ros-notebook:minimal-noetic
 
 # add your customizations here
 USER root

@@ -1,5 +1,5 @@
 # github action for building and pushing docker images
-name: Build, test, and publish Docker Image tagged datascience-humble
+name: Build, test, and publish Docker Image tagged datascience-rolling
 
 env:
   # OWNER: ${{ github.repository_owner }}
@@ -64,7 +64,7 @@ jobs:
 
       - name: Build image 🛠
         run: |
-          docker build --rm --force-rm --tag ${{ env.REGISTRY }}/${{ env.OWNER }}/${{ env.IMAGE_NAME }}:latest images/datascience/humble
+          docker build --rm --force-rm --tag ${{ env.REGISTRY }}/${{ env.OWNER }}/${{ env.IMAGE_NAME }}:latest images/datascience/rolling
         env:
           DOCKER_BUILDKIT: 1
           # Full logs for CI build
@@ -85,12 +85,10 @@ jobs:
         uses: docker/build-push-action@v5
         if: github.ref == 'refs/heads/main' || github.event_name == 'schedule'
         with:
-          context: images/datascience/humble/
+          context: images/datascience/rolling/
           push: true
           tags: |
-            ${{ env.REGISTRY }}/${{ env.OWNER }}/${{ env.IMAGE_NAME }}:latest
-            ${{ env.REGISTRY }}/${{ env.OWNER }}/${{ env.IMAGE_NAME }}:${{steps.get_sha.outputs.sha12}}
-            ${{ env.REGISTRY }}/${{ env.OWNER }}/${{ env.IMAGE_NAME }}:humble
-            ${{ env.REGISTRY }}/${{ env.OWNER }}/${{ env.IMAGE_NAME }}:humble-${{steps.get_sha.outputs.sha12}}
-            ${{ env.REGISTRY }}/${{ env.OWNER }}/${{ env.IMAGE_NAME }}:datascience-humble
-            ${{ env.REGISTRY }}/${{ env.OWNER }}/${{ env.IMAGE_NAME }}:datascience-humble-${{steps.get_sha.outputs.sha12}}
+            ${{ env.REGISTRY }}/${{ env.OWNER }}/${{ env.IMAGE_NAME }}:rolling
+            ${{ env.REGISTRY }}/${{ env.OWNER }}/${{ env.IMAGE_NAME }}:rolling-${{steps.get_sha.outputs.sha12}}
+            ${{ env.REGISTRY }}/${{ env.OWNER }}/${{ env.IMAGE_NAME }}:datascience-rolling
+            ${{ env.REGISTRY }}/${{ env.OWNER }}/${{ env.IMAGE_NAME }}:datascience-rolling-${{steps.get_sha.outputs.sha12}}

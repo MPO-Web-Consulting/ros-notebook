@@ -88,5 +88,7 @@ jobs:
           context: images/datascience/foxy/
           push: true
           tags: |
+            ${{ env.REGISTRY }}/${{ env.OWNER }}/${{ env.IMAGE_NAME }}:foxy
+            ${{ env.REGISTRY }}/${{ env.OWNER }}/${{ env.IMAGE_NAME }}:foxy-${{steps.get_sha.outputs.sha12}}
             ${{ env.REGISTRY }}/${{ env.OWNER }}/${{ env.IMAGE_NAME }}:datascience-foxy
             ${{ env.REGISTRY }}/${{ env.OWNER }}/${{ env.IMAGE_NAME }}:datascience-foxy-${{steps.get_sha.outputs.sha12}}
