@@ -26,7 +26,11 @@ RUN set -eux; \
     rm -rf "$GNUPGHOME"
 
 # setup sources.list
-RUN echo "deb [ signed-by=/usr/share/keyrings/{{TEMPLATE_ROS_GENERATION}}-latest-archive-keyring.gpg ] http://packages.ros.org/{{TEMPLATE_ROS_GENERATION}}/ubuntu {{TEMPLATE_UBUNTU_CODENAME}} main" > /etc/apt/sources.list.d/{{TEMPLATE_ROS_GENERATION}}-latest.list
+{% set package_url_spec = 'ros'  -%}
+{% if TEMPLATE_ROS_GENERATION == 'ros2' -%}
+{% set package_url_spec = 'ros2'  -%}
+{% endif -%}
+RUN echo "deb [ signed-by=/usr/share/keyrings/{{TEMPLATE_ROS_GENERATION}}-latest-archive-keyring.gpg ] http://packages.ros.org/{{package_url_spec}}/ubuntu {{TEMPLATE_UBUNTU_CODENAME}} main" > /etc/apt/sources.list.d/{{TEMPLATE_ROS_GENERATION}}-latest.list
 
 # setup environment
 ENV LANG C.UTF-8

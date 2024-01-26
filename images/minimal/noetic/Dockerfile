@@ -26,7 +26,7 @@ RUN set -eux; \
     rm -rf "$GNUPGHOME"
 
 # setup sources.list
-RUN echo "deb [ signed-by=/usr/share/keyrings/ros1-latest-archive-keyring.gpg ] http://packages.ros.org/ros1/ubuntu focal main" > /etc/apt/sources.list.d/ros1-latest.list
+RUN echo "deb [ signed-by=/usr/share/keyrings/ros1-latest-archive-keyring.gpg ] http://packages.ros.org/ros/ubuntu focal main" > /etc/apt/sources.list.d/ros1-latest.list
 
 # setup environment
 ENV LANG C.UTF-8
