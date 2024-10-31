@@ -3,6 +3,8 @@
 [![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/MPO-Web-Consulting/ros-notebook/HEAD)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
 [![Open in Visual Studio Code](https://img.shields.io/badge/vscode-dev-blue)](https://open.vscode.dev/MPO-Web-Consulting/ros-notebook)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/mpo-web-consulting/ros-notebook/datascience-humble.yml)
+[![Maintainability](https://api.codeclimate.com/v1/badges/f5e4c6bc6a9d0d407b4b/maintainability)](https://codeclimate.com/github/MPO-Web-Consulting/ros-notebook/maintainability)
 
 ros-notebook is a community maintained [Jupyter Docker Stack](https://jupyter-docker-stacks.readthedocs.io/en/latest/contributing/stacks.html) image that adds [ROS](https://www.ros.org/) to the common notebook containers such as the `datascience-notebook`.
 
@@ -52,7 +54,22 @@ RUN mamba install -y tensorflow && \
 USER ${NB_UID}
 ```
 
-## Generate Images and Actions
+## Development
+
+### install dependencies
+
+```bash
+# create a virtual environment
+python3 -m venv venv
+
+# activate the virtual environment
+source venv/bin/activate
+
+# install the dependencies
+pip install -r requirements-dev.txt
+```
+
+### Generate Images and Actions
 
 The images and actions are generated from templates using [Jinja2](https://jinja.palletsprojects.com/en/3.0.x/). The templates are located in the `templates` directory. The images are defined in `images.yaml`.
 
