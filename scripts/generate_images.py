@@ -54,6 +54,11 @@ if __name__ == '__main__':
                 'TEMPLATE_UBUNTU_CODENAME': flavour['ubuntu_codename'],
             }
 
+            # if the image is 24.04 then add the quay.io repo to the base image
+            if flavour['ubuntu_codename'] == 'noble':
+                vars['TEMPLATE_BASE_IMAGE'] = '/'.join(
+                    ['quay.io', vars['TEMPLATE_BASE_IMAGE']])
+
             # render the template with the variables
             dockerfile = template.render(vars)
 

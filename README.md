@@ -16,6 +16,7 @@ ros-notebook is a community maintained [Jupyter Docker Stack](https://jupyter-do
 ![Noetic](https://img.shields.io/badge/Noetic-datascience--noetic-teal.svg)
 ![Foxy](https://img.shields.io/badge/Foxy-datascience--foxy-teal.svg)
 ![Humble](https://img.shields.io/badge/Humble-datascience--humble-teal.svg)
+![Jazzy](https://img.shields.io/badge/Jazzy-datascience--jazzy-teal.svg)
 ![Rolling](https://img.shields.io/badge/Rolling-datascience--rolling-teal.svg)
 
 Short tags are all based on the `datascience-notebook` where `<ros-version>` is the ROS version. For example, `noetic` is a ROS Noetic image based on the `datascience-notebook`.
@@ -27,7 +28,8 @@ Short tags are all based on the `datascience-notebook` where `<ros-version>` is 
 [![ros](https://img.shields.io/badge/ROS-Noetic-white.svg)](http://wiki.ros.org/noetic) | ![minimal-notebook](https://img.shields.io/badge/Jupyter-Minimal-orange.svg)
 [![ros](https://img.shields.io/badge/ROS-Foxy-white.svg)](http://wiki.ros.org/foxy) | ![scipy-notebook](https://img.shields.io/badge/Jupyter-Scipy-orange.svg)
 [![ros](https://img.shields.io/badge/ROS-Humble-white.svg)](http://wiki.ros.org/humble) | ![datascience-notebook](https://img.shields.io/badge/Jupyter-Data--Science-orange.svg)
-[![ros](https://img.shields.io/badge/ROS-Rolling-white.svg)](http://wiki.ros.org/rolling) | ![tensorflow-notebook](https://img.shields.io/badge/Jupyter-Tensorflow-orange.svg)
+[![ros](https://img.shields.io/badge/ROS-Jazzy-white.svg)](http://wiki.ros.org/jazzy) | ![tensorflow-notebook](https://img.shields.io/badge/Jupyter-Tensorflow-orange.svg)
+[![ros](https://img.shields.io/badge/ROS-Rolling-white.svg)](http://wiki.ros.org/rolling) |
 
 All other tags are formed as follows:
 
@@ -36,6 +38,17 @@ All other tags are formed as follows:
 where `<ros-version>` is the ROS version and `<notebook-type>` is the type of notebook. For example, `minimal-noetic` is a ROS Noetic image based on the `minimal-notebook`.
 
 ## Usage
+
+An example running the `datascience-notebook` with ROS Jammy. This will start a Jupyter notebook server and bind it to port 8888. You can access the notebook server by opening your browser and navigating to `http://localhost:8888`:
+
+```bash
+# run the container to test an image
+docker run -it --rm \
+    -p 8888:8888 \
+    -v $(pwd):/home/jovyan/work \
+    ghcr.io/mpo-web-consulting/ros-notebook:datascience-jammy \
+    start-notebook.sh --NotebookApp.token='' --NotebookApp.password=''
+```
 
 An example `Dockerfile` for a custom notebook image:
 
@@ -80,5 +93,19 @@ Use the following commands to generate the images and github actions files:
 python3 scripts/generate_images.py templates/Dockerfile.j2 images images.yaml
 
 # generate actions for all images
-python3 scripts/generate_workflows.py templates/action.yml.j2 images .github/workflows
+python3 scripts/generate_actions.py templates/action.yml.j2 images .github/workflows
+```
+
+### Build Locally to Test Generated Images
+
+```bash
+# build an image locally to test the generated Dockerfile
+docker build -t ros-notebook:latest -f images/datascience/humble/Dockerfile images/datascience/humble
+
+# run the image
+docker run -it --rm \
+    -p 8888:8888 \
+    -v $(pwd):/home/jovyan/work \
+    ros-notebook:latest \
+    start-notebook.sh --NotebookApp.token='' --NotebookApp.password=''
 ```

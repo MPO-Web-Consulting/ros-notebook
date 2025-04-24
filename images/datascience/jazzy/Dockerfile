@@ -31,7 +31,7 @@ RUN echo "deb [ signed-by=/usr/share/keyrings/ros2-latest-archive-keyring.gpg ] 
 # setup environment
 ENV LANG C.UTF-8
 ENV LC_ALL C.UTF-8
-ENV ROS_DISTRO rolling
+ENV ROS_DISTRO jazzy
 
 # install ros packages
 RUN apt-get update && apt-get install -y --no-install-recommends \

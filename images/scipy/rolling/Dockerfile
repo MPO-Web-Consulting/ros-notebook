@@ -3,7 +3,7 @@
 # template: templates/ros.Dockerfile.j2
 
 # base image
-FROM jupyter/scipy-notebook:ubuntu-22.04
+FROM quay.io/jupyter/scipy-notebook:ubuntu-24.04
 
 USER root
 
@@ -26,7 +26,7 @@ RUN set -eux; \
     rm -rf "$GNUPGHOME"
 
 # setup sources.list
-RUN echo "deb [ signed-by=/usr/share/keyrings/ros2-latest-archive-keyring.gpg ] http://packages.ros.org/ros2/ubuntu jammy main" > /etc/apt/sources.list.d/ros2-latest.list
+RUN echo "deb [ signed-by=/usr/share/keyrings/ros2-latest-archive-keyring.gpg ] http://packages.ros.org/ros2/ubuntu noble main" > /etc/apt/sources.list.d/ros2-latest.list
 
 # setup environment
 ENV LANG C.UTF-8
