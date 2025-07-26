@@ -33,9 +33,9 @@ RUN set -eux; \
 RUN echo "deb [ signed-by=/usr/share/keyrings/{{TEMPLATE_ROS_GENERATION}}-latest-archive-keyring.gpg ] http://packages.ros.org/{{package_url_spec}}/ubuntu {{TEMPLATE_UBUNTU_CODENAME}} main" > /etc/apt/sources.list.d/{{TEMPLATE_ROS_GENERATION}}-latest.list
 
 # setup environment
-ENV LANG C.UTF-8
-ENV LC_ALL C.UTF-8
-ENV ROS_DISTRO {{ TEMPLATE_ROS_VERSION }}
+ENV LANG=C.UTF-8
+ENV LC_ALL=C.UTF-8
+ENV ROS_DISTRO={{ TEMPLATE_ROS_VERSION }}
 
 # install ros packages
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -68,3 +68,8 @@ RUN colcon mixin add default \
 {% endif %}
 # Source the ROS setup file
 RUN echo "source /opt/ros/${ROS_DISTRO}/setup.bash" >> ~/.bashrc
+
+{% if TEMPLATE_UBUNTU_CODENAME == 'focal' -%}
+# warning in bashrc for focal EOL
+RUN echo "echo 'WARNING: Ubuntu Focal is EOL, this image is no longer supported'" >> ~/.bashrc
+{% endif -%}

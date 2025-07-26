@@ -18,10 +18,10 @@ ros_flavours:
     ubuntu_codename: "focal"
 
   # ros 2 images
-  - ros_distro: foxy
-    ros_version: 2
-    notebook_tag: ubuntu-20.04
-    ubuntu_codename: "focal"
+  # - ros_distro: foxy
+  #   ros_version: 2
+  #   notebook_tag: ubuntu-20.04
+  #   ubuntu_codename: "focal"
 
   - ros_distro: humble
     ros_version: 2

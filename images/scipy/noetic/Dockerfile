@@ -29,9 +29,9 @@ RUN set -eux; \
 RUN echo "deb [ signed-by=/usr/share/keyrings/ros1-latest-archive-keyring.gpg ] http://packages.ros.org/ros/ubuntu focal main" > /etc/apt/sources.list.d/ros1-latest.list
 
 # setup environment
-ENV LANG C.UTF-8
-ENV LC_ALL C.UTF-8
-ENV ROS_DISTRO noetic
+ENV LANG=C.UTF-8
+ENV LC_ALL=C.UTF-8
+ENV ROS_DISTRO=noetic
 
 # install ros packages
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -51,3 +51,6 @@ RUN rosdep update --rosdistro $ROS_DISTRO
 
 # Source the ROS setup file
 RUN echo "source /opt/ros/${ROS_DISTRO}/setup.bash" >> ~/.bashrc
+
+# warning in bashrc for focal EOL
+RUN echo "echo 'WARNING: Ubuntu Focal is EOL, this image is no longer supported'" >> ~/.bashrc

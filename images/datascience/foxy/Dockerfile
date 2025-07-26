@@ -59,3 +59,6 @@ RUN colcon mixin add default \
 
 # Source the ROS setup file
 RUN echo "source /opt/ros/${ROS_DISTRO}/setup.bash" >> ~/.bashrc
+
+# warning in bashrc for focal EOL
+RUN echo "echo 'WARNING: Ubuntu Focal is EOL, this image is no longer supported'" >> ~/.bashrc
